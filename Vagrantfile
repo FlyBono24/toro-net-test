@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-    config.vm.synced_folder ".", "/home/ubuntu/mevn-github-auth"
+    config.vm.synced_folder ".", "/home/ubuntu/toro-net-test"
 
 
   # Provider-specific configuration so you can fine-tune various
@@ -70,5 +70,5 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
-   config.vm.provision "shell", inline: "sh /home/ubuntu/mevn-github-auth/dev-env.sh"
+   config.vm.provision "shell", inline: "sh /home/ubuntu/toro-net-test/dev-env.sh"
 end
