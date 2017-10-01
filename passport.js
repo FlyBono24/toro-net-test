@@ -1,5 +1,6 @@
 const GitHubStrategy = require('passport-github').Strategy,
-      User = require('./server/models/user')
+      User = require('./server/models/user'),
+      LocalStrategy = require('passport-local').Strategy
 
 module.exports = function (passport) {
   passport.serializeUser(function(user, done) {
@@ -14,31 +15,44 @@ module.exports = function (passport) {
     clientID: process.env.GITHUB_ID,
     clientSecret: process.env.GITHUB_SECRET,
     callbackURL: process.env.APP_URL+'auth/github/callback'
-  },
-  function(accessToken, refreshToken, profile, done) {
+    },
+    function(accessToken, refreshToken, profile, done) {
+      User.findOne({ 'id': profile.id }, function (err, user) {
+        if (err) {
+          return done(err)
+        }
 
-    User.findOne({ 'id': profile.id }, function (err, user) {
-      if (err) {
-        return done(err)
-      }
+        if (user) {
+          return done(null, user)
+        } else {
+          var newUser = new User()
 
-      if (user) {
-        return done(null, user)
-      } else {
-        var newUser = new User()
+          newUser.id = profile.id
+          newUser.username = profile.username
+          newUser.displayName = profile.displayName
 
-        newUser.id = profile.id
-        newUser.username = profile.username
-        newUser.displayName = profile.displayName
+          newUser.save(function (err) {
+            if (err) {
+              throw err
+            }
 
-        newUser.save(function (err) {
-          if (err) {
-            throw err
-          }
+            return done(null, profile)
+          })
+        }
+      })
+    }))
 
-          return done(null, profile)
-        })
-      }
-    })
-  }))
+  passport.use(new LocalStrategy({
+      usernameField: 'email'
+    },
+    (email, password, done) => {
+      User.findOne({ email: email}, (err, user) => {
+        if (err) { return done(err); }
+        if (!user) { return done(null, false); }
+        // if (!user.verifyPassword(password)) { return done(null, false); }
+        if (user.password != password) { return done(null, false); }
+        return done(null, user);
+      });
+    }
+  ))
 }

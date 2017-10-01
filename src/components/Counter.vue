@@ -6,7 +6,7 @@
   </div>
   <div v-else>
     <router-link to="/login">
-      <button class="btn btn-primary">Login!</button>
+      <button class="btn btn-primary">Login</button>
     </router-link>
   </div>
 </template>

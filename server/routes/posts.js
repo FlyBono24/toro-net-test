@@ -28,7 +28,7 @@ module.exports = (() => {
           init.save(err => {
             if (err) throw err
             console.log('Sample post initialized.')
-            res.json({ posts: [init] })
+            res.json({ posts: init })
           })
         }
         else {
@@ -44,7 +44,7 @@ module.exports = (() => {
 
       Post.create(newPost, (err, post) => {
         if (err) throw err
-        res.json({ posts: [newPost] })
+        res.json({ posts: newPost })
       })
     })
 

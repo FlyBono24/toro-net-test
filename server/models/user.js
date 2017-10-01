@@ -3,8 +3,10 @@ const mongoose = require('mongoose'),
 
 var User = new Schema({
   id: String,
-  displayName: String,
+  email: String,
   username: String,
+  password: String,
+  displayName: String,
   isAdmin: Boolean
 })
 

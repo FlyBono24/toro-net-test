@@ -1,8 +1,8 @@
 {
-  "name": "mevn-github-auth",
-  "description": "A MEVN Biolerplate project (Mongo, Express, Vue, Node)",
-  "version": "0.0.2",
-  "author": "Anton de Regt <ditisanton@gmail.com>",
+  "name": "toro-net-test",
+  "description": "A Toro Net test with a new boilerplate",
+  "version": "0.0.1",
+  "author": "CSUDH CSC 583 Team",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
@@ -20,6 +20,7 @@
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-github": "^1.1.0",
+    "passport-local": "^1.0.0",
     "vue": "^2.2.1",
     "vue-router": "^2.4.0",
     "vuex": "^2.3.0"

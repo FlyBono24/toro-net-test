@@ -4,6 +4,7 @@ const mongoose = require('mongoose'),
 var Post = new Schema({
   id: String,
   username: String,
+  email: String,
   displayName: String,
   date: Date,
   title: { type: String, required: true },

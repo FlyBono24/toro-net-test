@@ -1,7 +1,15 @@
 <template>
-  <div>
+  <div class="container">
+    <div class="form-group">
+      <input class="form-control" type="email" placeholder="Email" v-model="email">
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" id="password" placeholder="Password" v-model="password">
+    </div>
+    <button class="btn btn-success" @click="login">Login</button>
+    <h4 class="mx-auto">OR<h4>
     <a href="/auth/github" class="btn btn-github">
-      <i class="fa fa-github" aria-hidden="true"> Login with Github</i>
+      <i class="fa fa-github"></i> Login with Github
     </a>
   </div>
 </template>
@@ -17,3 +25,20 @@
   color: white;
 }
 </style>
+
+<script>
+export default {
+  name: 'Login',
+  data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  methods: {
+    login() {
+      this.$store.dispatch('login', this.$store.state.user)
+    }
+  }
+}
+</script>

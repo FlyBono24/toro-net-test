@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/counter">Counter</router-link> |
-    <a v-if="this.$store.state.user.displayName" href="/logout" @click="logout">Log Out</a>
+    <router-link to="/">Home</router-link>
+    <a v-if="!this.$store.state.user.displayName" href="/register" @click="register">Register</a>
+    <a v-if="this.$store.state.user.displayName" href="/logout" @click="logout">Logout</a>
     <router-link v-else to="/login">Login</router-link>
     <h1>{{ title }}</h1>
     <hr />
@@ -36,7 +36,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 
 h1, h2 {

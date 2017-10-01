@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
   # within the machine from a port on the host machine and only allow access
   # via 127.0.0.1 to disable public access
   # config.vm.network "forwarded_port", guest: 80, host: 3000, host_ip: "127.0.0.1"
-    config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-    config.vm.synced_folder ".", "/home/ubuntu/toro-net-test"
+  config.vm.synced_folder ".", "/home/ubuntu/toro-net-test"
 
 
   # Provider-specific configuration so you can fine-tune various
@@ -70,5 +70,18 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
-   config.vm.provision "shell", inline: "sh /home/ubuntu/toro-net-test/dev-env.sh"
+$script = <<SCRIPT
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 &&
+echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list &&
+sudo apt-get update &&
+sudo apt-get install -y mongodb-org &&
+sudo service mongod start &&
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - &&
+sudo apt-get install -y nodejs &&
+cd /home/ubuntu/toro-net-test/ && npm install &&
+npm run serve &
+/home/ubuntu/toro-net-test/node_modules/nodemon/bin/nodemon.js server.js &
+SCRIPT
+
+  config.vm.provision "shell", privileged: true, inline: $script
 end
