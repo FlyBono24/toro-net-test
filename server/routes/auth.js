@@ -19,4 +19,10 @@ router.post('/',
     res.redirect('/')
   })
 
+router.post('/register',
+  passport.authenticate('local', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/')
+  })
+
 module.exports = router
