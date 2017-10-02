@@ -1,6 +1,6 @@
 <template>
   <div class="container" v-if="this.$store.state.user.displayName">
-    <h4>Welcome {{this.$store.state.user.displayName}}! What's happening?</h4>
+    <h4>Welcome {{this.$store.state.user.email}}! What's happening?</h4>
     <br>
     <div class="form-group">
       <input type="text" class="form-control" id="title" placeholder="Title" v-model="title">

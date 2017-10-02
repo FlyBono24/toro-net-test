@@ -7,6 +7,7 @@ const express = require('express'),
       count = require('./server/routes/count'),
       auth = require('./server/routes/auth'),
       index = require('./server/routes/index')
+      users = require('./server/routes/users')
 
 require('dotenv').load();
 require('./passport')(passport)
@@ -28,8 +29,9 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use('/auth', auth)
-app.use('/api/count', count)
+app.use('/count', count)
 app.use('/', index)
+app.use('/users', users)
 
 const port =  process.env.PORT || 3000;
 app.listen(port, () => console.log('Running on localhost:', port))

@@ -37,7 +37,11 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch('login', this.$store.state.user)
+      const user = {
+        email: this.email,
+        password: this.password
+      }
+      this.$store.dispatch('login', user)
     }
   }
 }

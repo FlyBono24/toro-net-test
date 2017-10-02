@@ -13,7 +13,7 @@ export const getUser = ({commit}) => {
 }
 
 export const getCount = ({commit}) => {
-  fetch(`/api/count`, {
+  fetch(`/count`, {
     method: 'GET'
   })
   .then(response => response.json())
@@ -21,7 +21,7 @@ export const getCount = ({commit}) => {
 }
 
 export const incCount = ({commit}, count_payload) => {
-  fetch(`/api/count`, {
+  fetch(`/count`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -33,15 +33,24 @@ export const incCount = ({commit}, count_payload) => {
   .then(json => commit(types.INC_COUNT, json))
 }
 
-export const register = ({commit}) => {
-  
+export const register = ({commit}, user_payload) => {
+  console.log(user_payload)
+  fetch(`/users`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user_payload)
+  })
+  .then(response => response.json())
+  .then(json => commit(types.REGISTER, json))
 }
 
 export const login = ({commit}) => {
   axios.get('/isauth')
   .then(function (response) {
-    console.log('Retrieved user data: ', response.data);
-    commit(types.GET_USER, response.data)
+    commit(types.LOGIN, response.data)
   })
   .catch(function (error) {
     console.log(error);
@@ -53,7 +62,7 @@ export const logout = ({commit}) => {
 }
 
 export const addPost = ({commit}, posts_payload) => {
-  fetch(`/api/posts`), {
+  fetch(`/posts`), {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -69,7 +78,7 @@ export const addPost = ({commit}, posts_payload) => {
 }
 
 export const getPosts = ({commit}) => {
-  axios.get('/api/posts')
+  axios.get('/posts')
   .then(function (response) {
     console.log('Retrieved posts: ', response.data);
     commit(types.GET_POSTS, response.data)

@@ -1,35 +1,23 @@
 <template>
   <div class="container">
     <div class="form-group">
-      <input type="text" class="form-control" id="displayName" placeholder="Display name" v-model="displayName">
+      <input type="text" class="form-control" placeholder="Display name" v-model="displayName">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" id="username" placeholder="Username" v-model="username">
+      <input type="text" class="form-control" placeholder="Username" v-model="username">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" id="email" placeholder="Email" v-model="email">
+      <input type="text" class="form-control" placeholder="Email" v-model="email">
     </div>
     <div class="form-group">
-      <input type="password" class="form-control" id="password" placeholder="Password" v-model="password">
+      <input type="password" class="form-control" placeholder="Password" v-model="password">
     </div>
     <div class="form-group">
-      <input type="password" class="form-control" id="password2" placeholder="Confirm password" v-model="password2">
+      <input type="password" class="form-control" placeholder="Confirm password" v-model="passwordConf">
     </div>
-    <button class="btn btn-success" @click="registerUser">Register</button>
+    <button class="btn btn-success" @click="registerUser()">Register</button>
   </div>
 </template>
-
-<style scoped>
-.btn-github {
-  border: 0;
-  background: #444;
-  color: white;
-}
-.btn-github:hover {
-  background: #2B2B2B;
-  color: white;
-}
-</style>
 
 <script>
 export default {
@@ -37,24 +25,20 @@ export default {
   data() {
     return {
       displayName: '',
-      username: '',
+      username: '', 
       email: '',
       password: '',
-      password2: ''
-    };
+      passwordConf: '' 
+    }
   },
   methods: {
-    registerUser(displayName,
-                 username,
-                 email,
-                 password,
-                 password2) {
+    registerUser() {
       const newUser = {
-        displayName: displayName,
-        username: username,
-        email: email,
-        password: password,
-        password2: password2
+        displayName: this.displayName,
+        username: this.username,
+        email: this.email,
+        password: this.password,
+        passwordConf: this.passwordConf,
       }
       this.$store.dispatch('register', newUser)
     }

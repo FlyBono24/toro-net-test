@@ -13,15 +13,15 @@ module.exports = (() => {
 
     router.get('/', (req, res) => {
       Count.findOne({}, countProjection, (err, count) => {
-        if(err) throw err
-        if(!count || count.count === null) {
+        if (err) throw err
+        if (!count || count.count === null) {
 
           const init = new Count({
             count: 0
           })
 
           init.save(err => {
-            if(err) throw err
+            if (err) throw err
             console.log('Init saved')
             res.json({ count: { count: 0 } })
           })
@@ -37,7 +37,7 @@ module.exports = (() => {
       const newScore = count
 
       Count.findOneAndUpdate({}, { count: newScore }, { projection: countProjection }, (err, score) => {
-        if(err) throw err
+        if (err) throw err
         res.json({ count: newScore })
       })
     })
