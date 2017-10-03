@@ -5,26 +5,26 @@ const mongoose = require('mongoose'),
 var User = new Schema({
   email: {
     type: String,
-    unique: true,
+    // unique: true,
     trim: true
   },
   username: {
     type: String,
-    unique: true,
-    required: true,
+    // unique: true,
+    // required: true,
     trim: true
   },
   password: {
     type: String,
-    required: true
+    // required: true
   },
   passwordConf: {
     type: String,
-    required: true
+    // required: true
   },
   displayName: {
     type: String,
-    required: true
+    // required: true
   }
 })
 
