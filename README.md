@@ -1,15 +1,9 @@
-# Toro Net (with GitHub authentication)
+# Toro Net
 
-MEVN means it contains MongoDB, ExpressJS, VueJS and NodeJS
-it is based on vue cli (webpack-simple template).
-Mongoose runs on top of MongoDB. [How to install MongoDB on Windows](https://www.youtube.com/watch?v=1uFY60CESlM&t=605s)
+## Getting started
 
-It uses PassportJS to authenticate a user with GitHub.
-[Toro Net without PassportJS](https://github.com/antonderegt/mevn-boilerplate)
-
-## How to start
-
-Add a .env file with your PORT, MONGO_URI, [GITHUB_ID, GITHUB_SECRET and APP_URL](https://github.com/jaredhanson/passport-github) like this:
+Add a `.env` file with your PORT, MONGO_URI, 
+[GITHUB_ID, GITHUB_SECRET and APP_URL](https://github.com/jaredhanson/passport-github) like this:
 
 ``` bash
 PORT=3000
@@ -22,21 +16,33 @@ APP_URL=http://127.0.0.1:3000/
 After that execute the following:
 
 ``` bash
-# clone the repo
-git clone https://github.com/antonderegt/mevn-github-auth.git
+# fork the repo then clone it to your local machine
+git clone https://github.com/<your username>/toro-net-test.git
 
-# install dependencies
-npm install
+# cd into the dir
+cd toro-net-test
+
+# provision the vagrant box
+vagrant up
+
+# ssh into your box
+vagrant ssh
+
+# cd into the dir on your box
+cd toro-net-test
+
+# install dependencies (mongo, node, npm packages)
+./dev-env.sh
 
 # build and watch for changes
 npm run serve
 
-# run MongoDB
-mongod
+# run mongo as a service
+sudo service mongod start
 
-# run in a seperate terminal to serve at localhost:3000
-nodemon server.js
-
-# build for production with minification
-npm run build
+# open a new terminal on your host os
+cd toro-net-test
+vagrant ssh
+cd toro-net-test
+./node_modules/nodemon/bin/nodemon.js server.js
 ```
